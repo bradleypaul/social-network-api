@@ -24,7 +24,7 @@ const thoughtController = {
       .catch(err => res.status(400).json(err));
   },
 
-  create({ params, body }, res) {
+  create({ body }, res) {
     Thought.create(body)
       .then(({ _id }) => {
         return User.findOneAndUpdate(

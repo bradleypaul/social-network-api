@@ -4,10 +4,8 @@ const userController = {
   getAll(_, res) {
     User.find({})
     .select('-__v')
-    .sort({ _id: -1})
     .then(records => res.json(records))
     .catch(err => res.status(400).json(err));
-
   },
 
   getById({ params }, res) {
@@ -17,7 +15,7 @@ const userController = {
       if(!record) {
         res.status(404).json({
           message: 'No user found with this id!'
-        })
+        });
         return;
       }
       res.json(record);
@@ -26,7 +24,6 @@ const userController = {
   },
 
   create({ body }, res) {
-    console.log(body)
     User.create(body)
     .then(record => res.json(record))
     .catch(err => res.status(400).json(err));
